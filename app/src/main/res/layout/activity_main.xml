@@ -31,10 +31,10 @@
         android:id="@+id/vertical_layout">
 
         <TextView
+            android:id="@+id/message_box"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Hello World!"
-            android:id="@+id/message_box" />
+            android:text="Welcome To Wordstack!" />
 
         <LinearLayout
             android:orientation="horizontal"
