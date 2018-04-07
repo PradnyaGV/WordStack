@@ -1,6 +1,6 @@
 /* Word Stack
-By Pradnya Valsangkar
- */
+Author: Pradnya Valsangkar */
+
 
 package com.google.engedu.wordstack;
 
@@ -94,6 +94,8 @@ public class MainActivity extends AppCompatActivity {
             return false;
         }
     }*/
+   static StringBuffer tempw1=new StringBuffer();
+   static StringBuffer tempw2=new StringBuffer();
 
     private class DragListener implements View.OnDragListener {
 
@@ -121,6 +123,13 @@ public class MainActivity extends AppCompatActivity {
                     // Dropped, reassign Tile to the target Layout
                     LetterTile tile = (LetterTile) event.getLocalState();
                     tile.moveToViewGroup((ViewGroup) v);
+
+                    if(v.getId()==R.id.word1)
+                        tempw1.append(tile.letter);
+                    if(v.getId()==R.id.word2)
+                        tempw2.append(tile.letter);
+                    System.out.println("tempw1:"+tempw1);
+                    System.out.println("tempw2:"+tempw2);
                     if (stackedLayout.empty()) {
                         TextView messageBox = (TextView) findViewById(R.id.message_box);
                         messageBox.setText(word1 + " " + word2);
@@ -130,6 +139,11 @@ public class MainActivity extends AppCompatActivity {
                             ((LinearLayout) w1).removeAllViews();
                         if(((LinearLayout) w2).getChildCount() > 0)
                             ((LinearLayout) w2).removeAllViews();
+
+                        if(word1.equals(tempw1.toString()) && word2.equals(tempw2.toString()))
+                            messageBox.setText("You win");
+                        else
+                            messageBox.setText("You lost");
                     }
                     LetterTile draged_tile = (LetterTile) event.getLocalState();
                     placedtiles.push(draged_tile);
@@ -181,7 +195,7 @@ public class MainActivity extends AppCompatActivity {
             LetterTile letterTile=new LetterTile(getApplicationContext(),revmsg.charAt(i));
             stackedLayout.push(letterTile);
         }
-        // messageBox.setText(msg);
+        messageBox.setText(msg);
         return true;
     }
 
